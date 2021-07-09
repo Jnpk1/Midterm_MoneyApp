@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-const Color kPrimaryColor = Color(0xFF333959);
-const Color kPrimaryColorLight = Color(0xFF5E6386);
+const Color kPrimaryColor = Color(0xFF033959);
+const Color kPrimaryColorLight = Color(0xFF5E2386);
 const Color kPrimaryColorDark = Color(0xFF091430);
 const Color kMessageTileColor = Color(0xFFC4C9D6);
 const Color kSelfMessageTileColor = Color(0xFF818795);
@@ -11,7 +11,7 @@ const Color kMessageBorderColor = Color(0xFF091430);
 const Color kCardColor = Color(0xFFC4C9D6);
 
 const Color kAccentColor = Color(0xFF626B8B);
-const Color kButtonColor = kPrimaryColorLight;
+const Color kButtonColor = Color(0xFF033959);
 const Color kOnButtonColor = Color(0xFFFFFFFF);
 const Color kFormColor = Color(0xFFC4C9D6);
 

@@ -27,6 +27,11 @@
               android:name="io.flutter.embedding.android.SplashScreenDrawable"
               android:resource="@drawable/launch_background"
               />
+              <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-5020228225603331~8379796434"/>
+            
+            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -37,6 +42,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
     </application>
     <queries>
       <!-- If your app opens https URLs -->

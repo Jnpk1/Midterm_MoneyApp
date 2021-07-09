@@ -9,6 +9,8 @@ import 'package:memoclub/shared/appbar.dart';
 import 'package:memoclub/shared/drawer.dart';
 import 'package:memoclub/shared/loading.dart';
 import 'package:provider/provider.dart';
+import 'package:memoclub/ad_helper.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class GamesRoom extends StatefulWidget {
   static final String routeName = '/games_room';
@@ -18,13 +20,43 @@ class GamesRoom extends StatefulWidget {
 
 class _GamesRoomState extends State<GamesRoom> {
   final myController = TextEditingController();
+  // TODO: Add _bannerAd
+  late BannerAd _bannerAd;
+
+  // TODO: Add _isBannerAdReady
+  bool _isBannerAdReady = false;
 
   @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    myController.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+
+    // COMPLETE: Initialize _bannerAd
+    _bannerAd = BannerAd(
+      adUnitId: AdHelper.bannerAdUnitId,
+      request: AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBannerAdReady = true;
+          });
+        },
+        onAdFailedToLoad: (ad, err) {
+          print('Failed to load a banner ad: ${err.message}');
+          _isBannerAdReady = false;
+          ad.dispose();
+        },
+      ),
+    );
+
+    _bannerAd.load();
   }
+
+  // void dispose() {
+  //   // Clean up the controller when the widget is disposed.
+  //   myController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +71,16 @@ class _GamesRoomState extends State<GamesRoom> {
             ),
             buildInput(context, myController),
           ],
-        )
+        ),
+        if (_isBannerAdReady)
+          Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              width: _bannerAd.size.width.toDouble(),
+              height: _bannerAd.size.height.toDouble(),
+              child: AdWidget(ad: _bannerAd),
+            ),
+          ),
       ]),
     );
   }
@@ -216,7 +257,7 @@ Widget buildInput(BuildContext context, TextEditingController myController) {
                 icon: Icon(Icons.send, size: 25),
                 onPressed: () async {
                   String msgContent = myController.text;
-                  myController.clear(); 
+                  myController.clear();
                   MessageCard mc = MessageCard(
                       author: newestMember.username,
                       content: msgContent,

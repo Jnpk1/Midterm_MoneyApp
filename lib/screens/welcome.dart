@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:memoclub/screens/home.dart';
 import 'package:memoclub/screens/register.dart';
 import 'package:memoclub/screens/sign_in.dart';
 import 'package:memoclub/screens/styles/buttons.dart';
@@ -21,7 +22,7 @@ class Welcome extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Image.asset(
-                  'assets/mc.png',
+                  'assets/movieroll.png',
                 ),
                 SizedBox(height: 15.0),
                 MaterialButton(
@@ -52,6 +53,26 @@ class Welcome extends StatelessWidget {
                     color: kButtonColor,
                     onPressed: () async {
                       Navigator.pushNamed(context, SignIn.routeName);
+                    }),
+                SizedBox(height: 15.0),
+                MaterialButton(
+                    elevation: buttonThemeElevation,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(buttonBorderRadius),
+                    ),
+                    child: Text('Sign In Anon',
+                        style: Theme.of(context)
+                            .textTheme
+                            .button
+                            ?.copyWith(color: kOnButtonColor)),
+                    color: kButtonColor,
+                    onPressed: () async {
+                      dynamic result = await _auth.signInAnon();
+                      if (result == null) {
+                        print(result);
+                      } else {
+                        Navigator.pushNamed(context, Home.routeName);
+                      }
                     }),
                 SizedBox(height: 15.0),
               ],

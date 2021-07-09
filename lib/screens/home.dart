@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:memoclub/models/Member.dart';
@@ -15,6 +17,7 @@ import 'package:memoclub/services/auth.dart';
 import 'package:memoclub/shared/appbar.dart';
 import 'package:memoclub/shared/drawer.dart';
 import 'package:provider/provider.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -25,6 +28,11 @@ class Home extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<Home> {
+  Future<InitializationStatus> _initGoogleMobileAds() {
+    // TODO: Initialize Google Mobile Ads SDK
+    return MobileAds.instance.initialize();
+  }
+
   @override
   Widget build(BuildContext context) {
     Member newestMember = Provider.of<Member>(context);
@@ -71,33 +79,22 @@ Widget home_content(BuildContext context) {
     padding: EdgeInsets.symmetric(vertical: 40.0, horizontal: 10.0),
     child: ListView(children: <Widget>[
       Card(
-          child: ListTile(
-        contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-        leading: Icon(
-          Icons.business_center,
-          size: 56.0,
-          color: Colors.white,
-        ),
-        tileColor: kPrimaryColor,
-        title: Text(
-          'Business \nChatRoom',
-          style: TextStyle(color: Colors.white),
-        ),
-        onTap: () {
-          Navigator.pushNamed(context, BusinessRoom.routeName);
-        },
+          child: Text(
+        'Movie Genre',
+        style: TextStyle(fontSize: 40),
+        textAlign: TextAlign.center,
       )),
       Card(
         child: ListTile(
           contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
           leading: Icon(
-            Icons.sports_esports_outlined,
+            Icons.theater_comedy_outlined,
             size: 56.0,
             color: Colors.white,
           ),
           tileColor: kPrimaryColor,
           title: Text(
-            'Games \nChatRoom',
+            'Comedy \nChatRoom',
             style: TextStyle(color: Colors.white),
           ),
           onTap: () {
@@ -109,13 +106,13 @@ Widget home_content(BuildContext context) {
           child: ListTile(
         contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
         leading: Icon(
-          Icons.health_and_safety_outlined,
+          Icons.favorite_border_outlined,
           size: 56.0,
           color: Colors.white,
         ),
         tileColor: kPrimaryColor,
         title: Text(
-          'Health \nChatRoom',
+          'Romance \nChatRoom',
           style: TextStyle(color: Colors.white),
         ),
         onTap: () {
@@ -126,13 +123,13 @@ Widget home_content(BuildContext context) {
           child: ListTile(
         contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
         leading: Icon(
-          Icons.book,
+          Icons.kitesurfing_outlined,
           size: 56.0,
           color: Colors.white,
         ),
         tileColor: kPrimaryColor,
         title: Text(
-          'Study \nChatRoom',
+          'Action \nChatRoom',
           style: TextStyle(color: Colors.white),
         ),
         onTap: () {
