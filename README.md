@@ -1,8 +1,3 @@
-# MemoClub 
-
-## Goal of this project
-
-* -------
 
 
 ## Contributors:
